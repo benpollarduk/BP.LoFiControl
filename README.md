@@ -10,6 +10,5 @@ TODO.
 
 ## Issues
 The are currently multiple issues with this implementation:
-* LoFiControl does not need to be a UserControl and be changed to a UIElement.
 * Rendering on LoFiMask is memory intensive and highly inefficient.
 * Content with transparent backgrounds can bee seen through the mask.
