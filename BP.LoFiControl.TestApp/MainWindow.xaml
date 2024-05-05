@@ -6,7 +6,7 @@
         xmlns:loFiControl="clr-namespace:BP.LoFiControl;assembly=BP.LoFiControl"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800">
-    <loFiControl:LoFiControl Scale="2" FramesPerSecond="20">
+    <loFiControl:LoFiControl Strength="1.2" FramesPerSecond="20">
         <loFiControl:LoFiControl.LoFiContent>
             <Grid Background="AliceBlue">
                 <Grid.RowDefinitions>

@@ -11,7 +11,7 @@ namespace BP.LoFiControl
         #region Properties
 
         /// <summary>
-        /// Get or set the lofi content. This is a dependency property.
+        /// Get or set the content to render in lo-fi. This is a dependency property.
         /// </summary>
         public object LoFiContent
         {
@@ -20,12 +20,12 @@ namespace BP.LoFiControl
         }
 
         /// <summary>
-        /// Get or set the scale for the mask. This is a dependency property.
+        /// Get or set the strength of the lo-fi effect. This is a dependency property.
         /// </summary>
-        public uint Scale
+        public double Strength
         {
-            get { return (uint)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
+            get { return (double)GetValue(StrengthProperty); }
+            set { SetValue(StrengthProperty, value); }
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace BP.LoFiControl
         public static readonly DependencyProperty LoFiContentProperty = DependencyProperty.Register(nameof(LoFiContent), typeof(FrameworkElement), typeof(LoFiControl), new PropertyMetadata(OnPixalatedContentPropertyChanged));
 
         /// <summary>
-        /// Identifies the LoFiControl.Scale property.
+        /// Identifies the LoFiControl.Strength property.
         /// </summary>
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(uint), typeof(LoFiControl), new PropertyMetadata((uint)1, OnScalePropertyChanged));
+        public static readonly DependencyProperty StrengthProperty = DependencyProperty.Register(nameof(Strength), typeof(double), typeof(LoFiControl), new PropertyMetadata(2d, OnStrengthPropertyChanged));
 
         /// <summary>
         /// Identifies the LoFiControl.FramesPerSecond property.
@@ -84,14 +84,14 @@ namespace BP.LoFiControl
             control.ContentControl.Content = args.NewValue;
         }
 
-        private static void OnScalePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static void OnStrengthPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var control = obj as LoFiControl;
 
             if (control == null)
                 return;
 
-            control.Mask.Scale = (uint)args.NewValue;
+            control.Mask.Strength = (double)args.NewValue;
         }
 
         private static void OnFramesPerSecondPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)

@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 namespace BP.LoFiControl
 {
     /// <summary>
-    /// Provides a Control that acts a mask to provide a lofi effect.
+    /// Provides a Control that acts a mask to provide a lo-fi effect.
     /// </summary>
     internal class LoFiMask : UserControl, IDisposable
     {
@@ -14,7 +14,7 @@ namespace BP.LoFiControl
 
         private Timer? timer;
         private FrameworkElement? source;
-        private uint scale = 2;
+        private double strength = 2;
         private uint framesPerSecond = 30;
         private bool isRendering;
 
@@ -36,14 +36,14 @@ namespace BP.LoFiControl
         }
 
         /// <summary>
-        /// Get or set the scale for the mask. This is a dependency property.
+        /// Get or set the strength of the lo-fi effect. This is a dependency property.
         /// </summary>
-        public uint Scale
+        public double Strength
         {
-            get { return scale; }
+            get { return strength; }
             set
             {
-                scale = value;
+                strength = value;
                 Start();
             }
         }
@@ -100,10 +100,10 @@ namespace BP.LoFiControl
                     {
                         isRendering = true;
 
-                        if (Source == null || Scale == 0)
+                        if (Source == null || Strength < 1.0)
                             return;
 
-                        var reductionSize = new Size(Source.ActualWidth / Scale, Source.ActualHeight / Scale);
+                        var reductionSize = new Size(Source.ActualWidth / Strength, Source.ActualHeight / Strength);
 
                         if (double.IsNaN(ActualWidth) ||
                             double.IsNaN(ActualHeight) ||
