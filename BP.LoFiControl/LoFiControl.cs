@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BP.LoFiControl
@@ -6,8 +7,15 @@ namespace BP.LoFiControl
     /// <summary>
     /// Interaction logic for LoFiControl.xaml
     /// </summary>
-    public partial class LoFiControl : UserControl
+    public class LoFiControl : ContentControl
     {
+        #region Fields
+
+        private LoFiMask mask;
+        private ContentPresenter presenter;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -65,9 +73,20 @@ namespace BP.LoFiControl
         /// </summary>
         public LoFiControl()
         {
-            InitializeComponent();
+            var grid = new Grid();
+            presenter = new ContentPresenter();
 
-            Mask.Source = ContentControl;
+            mask = new LoFiMask
+            {
+                Source = presenter,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
+            };
+
+            grid.Children.Add(presenter);
+            grid.Children.Add(mask);
+
+            Content = grid;
         }
 
         #endregion
@@ -81,7 +100,7 @@ namespace BP.LoFiControl
             if (control == null)
                 return;
 
-            control.ContentControl.Content = args.NewValue;
+            control.presenter.Content = args.NewValue;
         }
 
         private static void OnStrengthPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -91,7 +110,7 @@ namespace BP.LoFiControl
             if (control == null)
                 return;
 
-            control.Mask.Strength = (double)args.NewValue;
+            control.mask.Strength = (double)args.NewValue;
         }
 
         private static void OnFramesPerSecondPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -101,7 +120,7 @@ namespace BP.LoFiControl
             if (control == null)
                 return;
 
-            control.Mask.FramesPerSecond = (uint)args.NewValue;
+            control.mask.FramesPerSecond = (uint)args.NewValue;
         }
 
         #endregion

@@ -70,8 +70,6 @@ namespace BP.LoFiControl
         /// </summary>
         public LoFiMask()
         {
-            HorizontalAlignment = HorizontalAlignment.Stretch;
-            VerticalAlignment = VerticalAlignment.Stretch;
             IsHitTestVisible = false;
 
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.NearestNeighbor);
