@@ -1,0 +1,21 @@
+﻿<Window x:Class="BP.LoFiControl.TestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loFiControl="clr-namespace:BP.LoFiControl;assembly=BP.LoFiControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="800">
+    <loFiControl:LoFiControl Scale="2" FramesPerSecond="20">
+        <loFiControl:LoFiControl.LoFiContent>
+            <Grid Background="AliceBlue">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Test Label" Grid.Row="0"/>
+                <Button Content="Test Button" Margin="50" Grid.Row="1"/>
+            </Grid>
+        </loFiControl:LoFiControl.LoFiContent>
+    </loFiControl:LoFiControl>
+</Window>
