@@ -103,8 +103,10 @@ namespace BP.LoFiControl
                         if (Source == null || Strength < 1.0)
                             return;
 
+                        // calculate the reduced size
                         var reductionSize = new Size(Source.ActualWidth / Strength, Source.ActualHeight / Strength);
 
+                        // ensure that rendering is possible with the current sizes
                         if (double.IsNaN(ActualWidth) ||
                             double.IsNaN(ActualHeight) ||
                             double.IsNaN(reductionSize.Width) ||
@@ -113,17 +115,20 @@ namespace BP.LoFiControl
                             reductionSize.Height == 0)
                             return;
 
+                        // create a visual to host the lo-fi visual
                         var drawingVisual = new DrawingVisual();
 
+                        // render the source at the reduced size
                         using (var context = drawingVisual.RenderOpen())
                             context.DrawRectangle(new VisualBrush(Source), null, new Rect(new Point(), reductionSize));
 
+                        // TODO: resolve - this is extremely inefficient and memory intensive
+                        // render the lo-fi visual into a bitmap
                         var bitmap = new RenderTargetBitmap((int)reductionSize.Width, (int)reductionSize.Height, 96, 96, PixelFormats.Pbgra32);
                         bitmap.Render(drawingVisual);
 
-                        var imageBrush = new ImageBrush(bitmap);
-
-                        Background = imageBrush;
+                        // render the lo-fi bitmap as the background of the mask
+                        Background = new ImageBrush(bitmap);
                     }
                     finally
                     {
