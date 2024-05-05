@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace BP.LoFiControl
@@ -11,21 +10,19 @@ namespace BP.LoFiControl
     {
         #region Fields
 
-        private LoFiMask mask;
-        private ContentPresenter presenter;
+        /// <summary>
+        /// Get the ContentPresenter used to present the contents of the control.
+        /// </summary>
+        private ContentPresenter? Presenter => GetTemplateChild("PART_PRESENTER") as ContentPresenter;
+
+        /// <summary>
+        /// Get the LoFiMask used to mask the contents of the Presenter.
+        /// </summary>
+        private LoFiMask? Mask => GetTemplateChild("PART_MASK") as LoFiMask;
 
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Get or set the content to render in lo-fi. This is a dependency property.
-        /// </summary>
-        public object LoFiContent
-        {
-            get { return GetValue(LoFiContentProperty); }
-            set { SetValue(LoFiContentProperty, value); }
-        }
 
         /// <summary>
         /// Get or set the strength of the lo-fi effect. This is a dependency property.
@@ -50,11 +47,6 @@ namespace BP.LoFiControl
         #region DependencyProperties
 
         /// <summary>
-        /// Identifies the LoFiControl.LoFiContent property.
-        /// </summary>
-        public static readonly DependencyProperty LoFiContentProperty = DependencyProperty.Register(nameof(LoFiContent), typeof(FrameworkElement), typeof(LoFiControl), new PropertyMetadata(OnPixalatedContentPropertyChanged));
-
-        /// <summary>
         /// Identifies the LoFiControl.Strength property.
         /// </summary>
         public static readonly DependencyProperty StrengthProperty = DependencyProperty.Register(nameof(Strength), typeof(double), typeof(LoFiControl), new PropertyMetadata(2d, OnStrengthPropertyChanged));
@@ -73,54 +65,88 @@ namespace BP.LoFiControl
         /// </summary>
         public LoFiControl()
         {
-            var grid = new Grid();
-            presenter = new ContentPresenter();
-
-            mask = new LoFiMask
+            Template = CreateTemplate();
+            
+            Loaded += (_, _) =>
             {
-                Source = presenter,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Stretch
+                if (Mask != null)
+                    Mask.Source = Content as FrameworkElement;
             };
+            
+            Unloaded += (_, _) =>
+            {
+                if (Mask != null)
+                    Mask.Source = null;
+            };
+        }
 
-            grid.Children.Add(presenter);
-            grid.Children.Add(mask);
+        #endregion
 
-            Content = grid;
+        #region Overrides of ContentControl
+
+        /// <summary>
+        /// Called when the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property changes.
+        /// </summary>
+        /// <param name="oldContent">The old value of the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property.</param>
+        /// <param name="newContent">The new value of the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property.</param>
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+            base.OnContentChanged(oldContent, newContent);
+
+            if (Presenter != null)
+                Presenter.Content = newContent;
+
+            if (Mask != null)
+                Mask.Source = newContent as FrameworkElement;
         }
 
         #endregion
 
         #region StaticMethods
 
-        private static void OnPixalatedContentPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static ControlTemplate CreateTemplate()
         {
-            var control = obj as LoFiControl;
+            var template = new ControlTemplate(typeof(LoFiControl));
 
-            if (control == null)
-                return;
+            var contentPresenter = new FrameworkElementFactory(typeof(ContentPresenter))
+            {
+                Name = "PART_PRESENTER"
+            };
 
-            control.presenter.Content = args.NewValue;
+            var mask = new FrameworkElementFactory(typeof(LoFiMask))
+            {
+                Name = "PART_MASK"
+            };
+
+            var grid = new FrameworkElementFactory(typeof(Grid));
+            grid.AppendChild(contentPresenter);
+            grid.AppendChild(mask);
+
+            template.VisualTree = grid;
+
+            return template;
         }
 
         private static void OnStrengthPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var control = obj as LoFiControl;
+            var mask = control?.Mask;
 
-            if (control == null)
+            if (mask == null)
                 return;
 
-            control.mask.Strength = (double)args.NewValue;
+            mask.Strength = (double)args.NewValue;
         }
 
         private static void OnFramesPerSecondPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var control = obj as LoFiControl;
+            var mask = control?.Mask;
 
-            if (control == null)
+            if (mask == null)
                 return;
 
-            control.mask.FramesPerSecond = (uint)args.NewValue;
+            mask.FramesPerSecond = (uint)args.NewValue;
         }
 
         #endregion

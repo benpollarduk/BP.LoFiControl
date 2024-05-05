@@ -13,16 +13,14 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
             <loFiControl:LoFiControl Name="LoFiControl" Strength="1.2" FramesPerSecond="20">
-                <loFiControl:LoFiControl.LoFiContent>
-                    <Grid Background="AliceBlue">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Content="Test Label" Grid.Row="0"/>
-                        <Button Content="Test Button" Margin="50" Grid.Row="1"/>
-                    </Grid>
-                </loFiControl:LoFiControl.LoFiContent>
+                <Grid Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Test Label" Grid.Row="0"/>
+                    <Button Content="Test Button" Margin="50" Grid.Row="1"/>
+                </Grid>
             </loFiControl:LoFiControl>
         </Border>
         <Grid Grid.Row="1">
