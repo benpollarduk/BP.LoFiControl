@@ -16,4 +16,4 @@ LoFiControl provides a simple control that can display content at a reduced reso
 ## Issues
 The are currently multiple issues with this implementation:
 * Rendering on LoFiMask is memory intensive and highly inefficient.
-* Content with transparent backgrounds can bee seen through the mask.
+* Content with transparent backgrounds can be seen through the mask.
