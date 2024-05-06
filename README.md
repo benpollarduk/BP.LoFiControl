@@ -1,4 +1,4 @@
-# BP.LoFiControl
+we# BP.LoFiControl
 A WPF control that displays content contained within itself in low fidelity.
 
 ## Introduction
@@ -14,6 +14,6 @@ LoFiControl provides a simple control that can display content at a reduced reso
 ![image](https://github.com/benpollarduk/BP.LoFiControl/assets/129943363/2ed37738-01c3-4a9b-b560-a2016ea162de)
 
 ## Issues
-The are currently multiple issues with this implementation:
-* Rendering on LoFiMask is memory intensive and highly inefficient.
+The are currently two main issues with this implementation:
+* Rendering on LoFiMask is memory intensive and inefficient.
 * Content with transparent backgrounds can be seen through the mask.
