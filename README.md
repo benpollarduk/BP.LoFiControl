@@ -7,11 +7,13 @@ LoFiControl provides a simple control that can display content at a reduced reso
 
 ## Use
 ```xaml
-<LoFiControl Strength="3" FramesPerSecond="20">
+<LoFiPresenter Strength="3" FramesPerSecond="20">
     <Label Content="This is an example label" FontSize="20"/>
-</LoFiControl>
+</LoFiPresenter>
 ```
 ![image](https://github.com/benpollarduk/BP.LoFiControl/assets/129943363/2ed37738-01c3-4a9b-b560-a2016ea162de)
+
+## How it works
 
 ## Issues
 The are currently two main issues with this implementation:
