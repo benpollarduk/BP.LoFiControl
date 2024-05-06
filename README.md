@@ -1,5 +1,5 @@
 # BP.LoFiControl
-A WPF control that displays content contained within itself in low fidelity.
+A WPF control that displays content in reduced fidelity.
 
 ## Introduction
 There arent many options available for rendering WPF UIElements in artificially low resolution.
