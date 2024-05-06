@@ -4,9 +4,9 @@ using System.Windows.Controls;
 namespace BP.LoFiControl
 {
     /// <summary>
-    /// Interaction logic for LoFiControl.xaml
+    /// Provides a control for presenting content at a reduced fidelity.
     /// </summary>
-    public class LoFiControl : ContentControl
+    public class LoFiPresenter : ContentControl
     {
         #region Fields
 
@@ -47,23 +47,23 @@ namespace BP.LoFiControl
         #region DependencyProperties
 
         /// <summary>
-        /// Identifies the LoFiControl.Strength property.
+        /// Identifies the LoFiPresenter.Strength property.
         /// </summary>
-        public static readonly DependencyProperty StrengthProperty = DependencyProperty.Register(nameof(Strength), typeof(double), typeof(LoFiControl), new PropertyMetadata(2d, OnStrengthPropertyChanged));
+        public static readonly DependencyProperty StrengthProperty = DependencyProperty.Register(nameof(Strength), typeof(double), typeof(LoFiPresenter), new PropertyMetadata(2d, OnStrengthPropertyChanged));
 
         /// <summary>
-        /// Identifies the LoFiControl.FramesPerSecond property.
+        /// Identifies the LoFiPresenter.FramesPerSecond property.
         /// </summary>
-        public static readonly DependencyProperty FramesPerSecondProperty = DependencyProperty.Register(nameof(FramesPerSecond), typeof(uint), typeof(LoFiControl), new PropertyMetadata((uint)30, OnFramesPerSecondPropertyChanged));
+        public static readonly DependencyProperty FramesPerSecondProperty = DependencyProperty.Register(nameof(FramesPerSecond), typeof(uint), typeof(LoFiPresenter), new PropertyMetadata((uint)30, OnFramesPerSecondPropertyChanged));
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the LoFiControl class.
+        /// Initializes a new instance of the LoFiPresenter class.
         /// </summary>
-        public LoFiControl()
+        public LoFiPresenter()
         {
             Template = CreateTemplate();
             
@@ -106,7 +106,7 @@ namespace BP.LoFiControl
 
         private static ControlTemplate CreateTemplate()
         {
-            var template = new ControlTemplate(typeof(LoFiControl));
+            var template = new ControlTemplate(typeof(LoFiPresenter));
 
             var contentPresenter = new FrameworkElementFactory(typeof(ContentPresenter))
             {
@@ -129,7 +129,7 @@ namespace BP.LoFiControl
 
         private static void OnStrengthPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var control = obj as LoFiControl;
+            var control = obj as LoFiPresenter;
             var mask = control?.Mask;
 
             if (mask == null)
@@ -140,7 +140,7 @@ namespace BP.LoFiControl
 
         private static void OnFramesPerSecondPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var control = obj as LoFiControl;
+            var control = obj as LoFiPresenter;
             var mask = control?.Mask;
 
             if (mask == null)

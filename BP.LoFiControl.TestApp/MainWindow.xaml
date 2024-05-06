@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-            <loFiControl:LoFiControl Name="LoFiControl" Strength="1.2" FramesPerSecond="20">
+            <loFiControl:LoFiPresenter Name="LoFiPresenter" Strength="1.2" FramesPerSecond="20">
                 <Grid Background="AliceBlue">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -21,7 +21,7 @@
                     <Label Content="This is a test label" FontSize="20" Grid.Row="0"/>
                     <Button Content="This is a test button" FontSize="20" Margin="50" Grid.Row="1"/>
                 </Grid>
-            </loFiControl:LoFiControl>
+            </loFiControl:LoFiPresenter>
         </Border>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
             <Label Content="Strength:" 
                    Grid.Column="0"
                    Grid.Row="0"/>
-            <Slider Value="{Binding ElementName=LoFiControl, Path=Strength, Mode=TwoWay}" 
+            <Slider Value="{Binding ElementName=LoFiPresenter, Path=Strength, Mode=TwoWay}" 
                     Minimum="1"
                     Maximum="10"
                     SmallChange="0.01"
@@ -46,13 +46,13 @@
                     TickPlacement="BottomRight"
                     Grid.Column="1"
                     Grid.Row="0"/>
-            <Label Content="{Binding ElementName=LoFiControl, Path=Strength, Mode=TwoWay}" 
+            <Label Content="{Binding ElementName=LoFiPresenter, Path=Strength, Mode=TwoWay}" 
                    Grid.Column="2"
                    Grid.Row="0"/>
             <Label Content="FPS:" 
                    Grid.Column="0"
                    Grid.Row="1"/>
-            <Slider Value="{Binding ElementName=LoFiControl, Path=FramesPerSecond, Mode=TwoWay}" 
+            <Slider Value="{Binding ElementName=LoFiPresenter, Path=FramesPerSecond, Mode=TwoWay}" 
                     Minimum="1"
                     Maximum="60"
                     SmallChange="1"
@@ -62,7 +62,7 @@
                     TickPlacement="BottomRight"
                     Grid.Column="1"
                     Grid.Row="1"/>
-            <Label Content="{Binding ElementName=LoFiControl, Path=FramesPerSecond, Mode=TwoWay}" 
+            <Label Content="{Binding ElementName=LoFiPresenter, Path=FramesPerSecond, Mode=TwoWay}" 
                    Grid.Column="2"
                    Grid.Row="1"/>
         </Grid>
