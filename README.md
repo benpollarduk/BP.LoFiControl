@@ -2,7 +2,7 @@
 A WPF control that displays content in reduced fidelity.
 
 ## Introduction
-There arent many options available for rendering WPF UIElements in artificially low resolution.
+There aren't many options available for rendering WPF UIElements in artificially low resolution.
 LoFiPresenter provides a simple control that can display content at a reduced resolution and frame rate.
 
 ## Use
