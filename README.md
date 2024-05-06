@@ -1,4 +1,4 @@
-we# BP.LoFiControl
+# BP.LoFiControl
 A WPF control that displays content contained within itself in low fidelity.
 
 ## Introduction
