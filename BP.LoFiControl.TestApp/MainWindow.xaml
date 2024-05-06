@@ -18,8 +18,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Test Label" Grid.Row="0"/>
-                    <Button Content="Test Button" Margin="50" Grid.Row="1"/>
+                    <Label Content="This is a test label" FontSize="20" Grid.Row="0"/>
+                    <Button Content="This is a test button" FontSize="20" Margin="50" Grid.Row="1"/>
                 </Grid>
             </loFiControl:LoFiControl>
         </Border>
@@ -38,7 +38,7 @@
                    Grid.Row="0"/>
             <Slider Value="{Binding ElementName=LoFiControl, Path=Strength, Mode=TwoWay}" 
                     Minimum="1"
-                    Maximum="5"
+                    Maximum="10"
                     SmallChange="0.01"
                     LargeChange="0.01"
                     TickFrequency="0.01"
