@@ -70,7 +70,11 @@ namespace BP.LoFiControl
             Loaded += (_, _) =>
             {
                 if (Mask != null)
+                {
                     Mask.Source = Content as FrameworkElement;
+                    Mask.Strength = Strength;
+                    Mask.FramesPerSecond = FramesPerSecond;
+                }
             };
             
             Unloaded += (_, _) =>
