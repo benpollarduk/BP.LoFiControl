@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Strength:" 
+            <Label Content="Reduction:" 
                    Grid.Column="0"
                    Grid.Row="0"/>
             <Slider Value="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay}" 
