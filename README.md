@@ -34,6 +34,7 @@ Reduction 5:
 ![image](https://github.com/benpollarduk/BP.LoFiControl/assets/129943363/0468753b-727b-4ea0-ab15-c044d6110ea2)
 
 ## How it works
+LoFiControl is a simple codebase with 2 main classes, LoFiPresenter and LoFiMask.
 * LoFiPresenter hosts WPF content and a LoFiMask.
 * LoFiMask creates a bitmap at a lower resolution from the hosted content.
 * LoFiMask then renders this bitmap as its background at the same size as the hostesd content using BitmapScalingMode.NearestNeighbor to get the pixelated effect.
