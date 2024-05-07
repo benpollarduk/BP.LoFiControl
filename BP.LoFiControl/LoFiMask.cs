@@ -14,7 +14,7 @@ namespace BP.LoFiControl
 
         private Timer? timer;
         private FrameworkElement? source;
-        private double strength = 2;
+        private double reduction = 2;
         private uint framesPerSecond = 30;
         private bool isRendering;
 
@@ -36,14 +36,14 @@ namespace BP.LoFiControl
         }
 
         /// <summary>
-        /// Get or set the strength of the lo-fi effect. This is a dependency property.
+        /// Get or set the strength of the reduction. This is a dependency property.
         /// </summary>
-        public double Strength
+        public double Reduction
         {
-            get { return strength; }
+            get { return reduction; }
             set
             {
-                strength = value;
+                reduction = value;
                 Start();
             }
         }
@@ -98,11 +98,11 @@ namespace BP.LoFiControl
                     {
                         isRendering = true;
 
-                        if (Source == null || Strength < 1.0)
+                        if (Source == null || Reduction <= 1.0)
                             return;
 
                         // calculate the reduced size
-                        var reductionSize = new Size(Source.ActualWidth / Strength, Source.ActualHeight / Strength);
+                        var reductionSize = new Size(Source.ActualWidth / Reduction, Source.ActualHeight / Reduction);
 
                         // ensure that rendering is possible with the current sizes
                         if (double.IsNaN(ActualWidth) ||
@@ -150,6 +150,9 @@ namespace BP.LoFiControl
         private void Start()
         {
             Stop();
+
+            if (Reduction <= 1.0)
+                return;
 
             var frequency = 1000 / FramesPerSecond;
             timer = new Timer(_ => Render(), null, 0, frequency);

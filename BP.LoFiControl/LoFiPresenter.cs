@@ -25,12 +25,12 @@ namespace BP.LoFiControl
         #region Properties
 
         /// <summary>
-        /// Get or set the strength of the lo-fi effect. This is a dependency property.
+        /// Get or set the strength of the reduction. This is a dependency property.
         /// </summary>
-        public double Strength
+        public double Reduction
         {
-            get { return (double)GetValue(StrengthProperty); }
-            set { SetValue(StrengthProperty, value); }
+            get { return (double)GetValue(ReductionProperty); }
+            set { SetValue(ReductionProperty, value); }
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace BP.LoFiControl
         #region DependencyProperties
 
         /// <summary>
-        /// Identifies the LoFiPresenter.Strength property.
+        /// Identifies the LoFiPresenter.Reduction property.
         /// </summary>
-        public static readonly DependencyProperty StrengthProperty = DependencyProperty.Register(nameof(Strength), typeof(double), typeof(LoFiPresenter), new PropertyMetadata(2d, OnStrengthPropertyChanged));
+        public static readonly DependencyProperty ReductionProperty = DependencyProperty.Register(nameof(Reduction), typeof(double), typeof(LoFiPresenter), new PropertyMetadata(2d, OnReductionPropertyChanged));
 
         /// <summary>
         /// Identifies the LoFiPresenter.FramesPerSecond property.
@@ -127,7 +127,7 @@ namespace BP.LoFiControl
             return template;
         }
 
-        private static void OnStrengthPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static void OnReductionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var control = obj as LoFiPresenter;
             var mask = control?.Mask;
@@ -135,7 +135,8 @@ namespace BP.LoFiControl
             if (mask == null)
                 return;
 
-            mask.Strength = (double)args.NewValue;
+            mask.Reduction = (double)args.NewValue;
+            mask.Visibility = mask.Reduction > 1.0 ? Visibility.Visible : Visibility.Hidden;
         }
 
         private static void OnFramesPerSecondPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)

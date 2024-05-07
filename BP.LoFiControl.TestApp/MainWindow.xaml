@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-            <loFiControl:LoFiPresenter Name="LoFiPresenter" Strength="1.2" FramesPerSecond="20">
+            <loFiControl:LoFiPresenter Name="LoFiPresenter" Reduction="1.2" FramesPerSecond="20">
                 <Grid Background="AliceBlue">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -36,7 +36,7 @@
             <Label Content="Strength:" 
                    Grid.Column="0"
                    Grid.Row="0"/>
-            <Slider Value="{Binding ElementName=LoFiPresenter, Path=Strength, Mode=TwoWay}" 
+            <Slider Value="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay}" 
                     Minimum="1"
                     Maximum="10"
                     SmallChange="0.01"
@@ -46,7 +46,7 @@
                     TickPlacement="BottomRight"
                     Grid.Column="1"
                     Grid.Row="0"/>
-            <Label Content="{Binding ElementName=LoFiPresenter, Path=Strength, Mode=TwoWay}" 
+            <Label Content="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay}" 
                    Grid.Column="2"
                    Grid.Row="0"/>
             <Label Content="FPS:" 
