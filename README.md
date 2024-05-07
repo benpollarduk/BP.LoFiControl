@@ -7,7 +7,7 @@ LoFiPresenter provides a simple control that can display content at a reduced re
 
 ## Use
 ```xaml
-<LoFiPresenter Strength="3" FramesPerSecond="20">
+<LoFiPresenter Reduction="3" FramesPerSecond="20">
     <Label Content="This is an example label" FontSize="20"/>
 </LoFiPresenter>
 ```
