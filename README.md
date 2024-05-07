@@ -6,7 +6,7 @@ There aren't many options available for rendering WPF UIElements in artificially
 LoFiPresenter provides a simple control that can display content at a reduced resolution and frame rate.
 
 ## Use
-```xaml
+```xml
 <LoFiPresenter Reduction="3" FramesPerSecond="20">
     <Label Content="This is an example label" FontSize="20"/>
 </LoFiPresenter>
