@@ -1,5 +1,13 @@
+<div align="center">
+
 # BP.LoFiControl
+
 A WPF control that displays content in reduced fidelity. Supports .Net 8.0.
+
+[![GitHub release](https://img.shields.io/github/release/benpollarduk/BP.LoFiControl.svg)](https://github.com/benpollarduk/BP.LoFiControl/releases)
+[![License](https://img.shields.io/github/license/benpollarduk/BP.LoFiControl.svg)](https://opensource.org/licenses/MIT)
+
+</div>
 
 ## Introduction
 There aren't many options available for rendering WPF UIElements in artificially low resolution.
