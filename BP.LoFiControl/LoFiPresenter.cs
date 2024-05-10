@@ -72,7 +72,7 @@ namespace BP.LoFiControl
                 if (Mask != null)
                 {
                     Mask.Source = Content as FrameworkElement;
-                    Mask.Strength = Strength;
+                    Mask.Reduction = Reduction;
                     Mask.FramesPerSecond = FramesPerSecond;
                 }
             };

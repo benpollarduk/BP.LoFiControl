@@ -4,67 +4,119 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:loFiControl="clr-namespace:BP.LoFiControl;assembly=BP.LoFiControl"
+        xmlns:testApp="clr-namespace:BP.LoFiControl.TestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="LoFiPresenter Example" Height="600" Width="800">
+    <Window.Resources>
+        <testApp:DoubleRoundingConverter x:Key="DoubleRoundingConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-            <loFiControl:LoFiPresenter Name="LoFiPresenter" Reduction="1.2" FramesPerSecond="20">
-                <Grid Background="AliceBlue">
+            <loFiControl:LoFiPresenter Name="LoFiPresenter"
+                                       Reduction="{Binding ElementName=ReductionSlider, Path=Value, Mode=OneWay}"
+                                       FramesPerSecond="{Binding ElementName=FPSSlider, Path=Value, Mode=OneWay}">
+                <Grid Background="Gray">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="24"/>
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Content="This is a test label" FontSize="20" Grid.Row="0"/>
-                    <Button Content="This is a test button" FontSize="20" Margin="50" Grid.Row="1"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Mugshot.jpg" 
+                           Margin="10" 
+                           Grid.Row="0" 
+                           Grid.Column="0"/>
+                    <StackPanel Margin="10" 
+                                Grid.Row="0" 
+                                Grid.Column="1">
+                        <Label Content="Name: Santa"/>
+                        <Label Content="Age: Unknown"/>
+                        <Label Content="Diet: Mince Pies and Sherry"/>
+                        <Label Content="Charged With: DUI"/>
+                    </StackPanel>
+                    <Button Content="Make bad Santa lofi!" 
+                            Margin="10" 
+                            FontSize="24" 
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            Grid.ColumnSpan="2">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ReductionSlider" 
+                                                         Storyboard.TargetProperty="Value"
+                                                         From="1" 
+                                                         To="10"
+                                                         Duration="0:0:5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
                 </Grid>
             </loFiControl:LoFiPresenter>
         </Border>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Reduction:" 
-                   Grid.Column="0"
-                   Grid.Row="0"/>
-            <Slider Value="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay}" 
-                    Minimum="1"
-                    Maximum="10"
-                    SmallChange="0.01"
-                    LargeChange="0.01"
-                    TickFrequency="0.01"
-                    IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
-                    Grid.Column="1"
-                    Grid.Row="0"/>
-            <Label Content="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay}" 
-                   Grid.Column="2"
-                   Grid.Row="0"/>
-            <Label Content="FPS:" 
-                   Grid.Column="0"
-                   Grid.Row="1"/>
-            <Slider Value="{Binding ElementName=LoFiPresenter, Path=FramesPerSecond, Mode=TwoWay}" 
-                    Minimum="1"
-                    Maximum="60"
-                    SmallChange="1"
-                    LargeChange="1"
-                    TickFrequency="1"
-                    IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
-                    Grid.Column="1"
-                    Grid.Row="1"/>
-            <Label Content="{Binding ElementName=LoFiPresenter, Path=FramesPerSecond, Mode=TwoWay}" 
-                   Grid.Column="2"
-                   Grid.Row="1"/>
-        </Grid>
+        <GroupBox Header="LoFiPresenter Controls"
+                  Margin="10"
+                  Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Reduction:" 
+                       Grid.Column="0"
+                       Grid.Row="0"/>
+                <Slider Name="ReductionSlider"
+                        Value="1"
+                        Minimum="1"
+                        Maximum="10"
+                        SmallChange="0.01"
+                        LargeChange="0.01"
+                        TickFrequency="0.01"
+                        IsSnapToTickEnabled="True"
+                        TickPlacement="BottomRight"
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+                <Label Content="{Binding ElementName=LoFiPresenter, Path=Reduction, Mode=TwoWay, Converter={StaticResource DoubleRoundingConverter}}" 
+                       Grid.Column="2"
+                       Grid.Row="0"/>
+                <Label Content="FPS:" 
+                       Grid.Column="0"
+                       Grid.Row="1"/>
+                <Slider Name="FPSSlider"
+                        Value="30" 
+                        Minimum="1"
+                        Maximum="60"
+                        SmallChange="1"
+                        LargeChange="1"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        TickPlacement="BottomRight"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+                <Label Content="{Binding ElementName=LoFiPresenter, Path=FramesPerSecond, Mode=TwoWay, Converter={StaticResource DoubleRoundingConverter}}" 
+                       Grid.Column="2"
+                       Grid.Row="1"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
