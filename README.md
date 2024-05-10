@@ -41,6 +41,11 @@ Reduction 5:
 
 ![image](https://github.com/benpollarduk/BP.LoFiControl/assets/129943363/0468753b-727b-4ea0-ab15-c044d6110ea2)
 
+## Hellow World
+For a Hello World example with a simple UI see [BP.LoFiControl.TestApp/MainWindow.xaml](https://github.com/benpollarduk/BP.LoFiControl/blob/main/BP.LoFiControl.TestApp/MainWindow.xaml)
+
+![lofi-example](https://github.com/benpollarduk/BP.LoFiControl/assets/129943363/d209cf53-4607-4735-b2c8-f19ed36b4fce)
+
 ## How it works
 LoFiControl is a simple codebase with 2 main classes, LoFiPresenter and LoFiMask.
 * LoFiPresenter hosts WPF content and a LoFiMask.
