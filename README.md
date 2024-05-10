@@ -51,6 +51,7 @@ LoFiControl is a simple codebase with 2 main classes, LoFiPresenter and LoFiMask
 * LoFiPresenter hosts WPF content and a LoFiMask.
 * LoFiMask creates a bitmap at a lower resolution from the hosted content.
 * LoFiMask then renders this bitmap as its background at the same size as the hostesd content using BitmapScalingMode.NearestNeighbor to get the pixelated effect.
+* The LoFiMask isn't visible to hit testing so allows the UI beneath it to function as usual.
 
 ## Issues
 The are currently two main issues with this implementation:
